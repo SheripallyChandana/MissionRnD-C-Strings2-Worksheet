@@ -12,8 +12,41 @@ Note: Dont modify original str or word,Just return count ,Spaces can also be par
 
 #include <stdlib.h>
 
+bool stringCompare(char* a, char* b, int n){
+	
+	while(n--){
+		if(*a != *b)
+			return *a - *b;
+		else{			
+			++a;
+			++b;
+		}		
+	}	
+    return 0;
+}
+
+int stringLength(char* array){
+	
+	int length;
+	for(length = 0; array[length] != '\0'; ++length);
+	return length;
+}
+
 int count_word_in_str_way_1(char *str, char *word){
-	return 0;
+
+	int count = 0;
+	int length = stringLength(word);
+	int overlap = 1;
+
+	while(*str != '\0'){
+		if(stringCompare(str++,word, length))
+			continue;
+		if(!overlap)
+			str += length - 1;
+		count++;
+		
+	}	
+	return count;
 }
 
 int count_word_int_str_way_2_recursion(char *str, char *word){
